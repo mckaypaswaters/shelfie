@@ -6,8 +6,8 @@ export default class Product extends React.Component {
     }
     render() {
         return(
-            <div>
-                This is the Product
+            <div className='flexinInven'>
+                {this.props.mappedInventory}
             </div>
         )
     }

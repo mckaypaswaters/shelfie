@@ -1,4 +1,5 @@
 import React from 'react'
+import shelfie from '../../assets/shelfie.png'
 
 export default class Header extends React.Component {
     constructor() {
@@ -6,9 +7,9 @@ export default class Header extends React.Component {
     }
     render() {
         return (
-            <div>
-                This is the Header
-            </div>
+            <header className='header'>
+                <img className='shelfie-logo' src={shelfie} alt="Shelfie Logo"/>
+            </header>
         )
     }
 }
