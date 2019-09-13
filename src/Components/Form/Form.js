@@ -1,5 +1,6 @@
 import React from 'react'
 import noImage from '../../assets/noImage.png'
+import axios from 'axios'
 
 export default class Form extends React.Component {
     constructor() {
@@ -26,11 +27,15 @@ export default class Form extends React.Component {
         this.setState({img_url: noImage})
     }
     addToInventory() {
-        this.props.inventoryArr.push({
-            name: this.state.name,
-            price: this.state.price,
-            img_url: this.state.img_url
+        axios.post('/api/product').then(res => {
+            console.log(this.state.name)
+            this.props.inventoryArr.push({
+                name: this.state.name,
+                img: this.state.img_url,
+                price: this.state.price
+            })
         })
+        this.props.getInventory()
     }
 
     render() {
