@@ -28,7 +28,7 @@ export default class Form extends React.Component {
     }
     addToInventory() {
         axios.post('/api/product', this.state)
-        this.props.getInventory()
+        // this.props.getInventory()
         this.cancel()
     }
 
