@@ -19,6 +19,7 @@ class App extends React.Component {
       this.setState({inventory: res.data})
     })
   }
+  
 
   render() {
     return (
@@ -27,6 +28,7 @@ class App extends React.Component {
         <div className='flexin'>
           <Dashboard
           inventoryArr = {this.state.inventory}
+          getInventory = {this.componentDidMount}
           />
           <Form
           inventoryArr = {this.state.inventory}
