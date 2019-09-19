@@ -1,14 +1,33 @@
 import React from 'react'
-import noImage from '../../assets/noImage.png'
+// import noImage from '../../assets/noImage.png'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class Form extends React.Component {
     constructor() {
         super()
         this.state = {
             name: '',
-            price: '',
-            img: ''
+            price: 0,
+            img: '',
+            toggle: false
+        }
+    }
+
+    componentDidMount() {
+        axios.get(`/api/product/${this.props.match.params.id}`).then(res => {
+            this.setState({name: res.data[0].name, price: res.data[0].price, img: res.data[0].img})
+        })
+        if (this.props.match.url.includes('edit')){
+            this.setState({toggle: false})
+        } else {
+            this.setState({toggle: true})
+        }
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props){
+            this.cancel()
+            this.setState({toggle: true})
         }
     }
 
@@ -26,10 +45,11 @@ export default class Form extends React.Component {
         this.setState({price: 0})
         this.setState({img: ''})
     }
-    addToInventory() {
+    creating() {
         axios.post('/api/product', this.state)
-        // this.props.getInventory()
-        this.cancel()
+    }
+    editing() {
+        axios.put(`/api/product/${this.props.match.params.id}`, this.state)
     }
 
     render() {
@@ -41,7 +61,13 @@ export default class Form extends React.Component {
                     <input className='productName' value={this.state.name} type="text" onChange={e => this.handleChangeProduct(e)}/>
                     <input className='price' value={this.state.price} type="number" onChange={e => this.handleChangePrice(e)}/>
                     <button onClick={() => this.cancel()}>Cancel</button>
-                    <button onClick={() => this.addToInventory()}>Add to inventory</button>
+                    {!this.state.toggle ? 
+                    <Link to='/'>
+                        <button onClick={() => this.editing()}>Save Changes</button>
+                    </Link> :
+                    <Link to='/'>
+                        <button onClick={() => this.creating()}>Add to inventory</button>
+                    </Link>}
                 </div>
             </div>
         )

@@ -1,6 +1,7 @@
 import React from 'react'
 import Product from '../Product/Product'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class Dashboard extends React.Component {
     constructor() {
@@ -20,6 +21,10 @@ export default class Dashboard extends React.Component {
         axios.delete(`/api/product/${id}`)
         this.componentDidMount()
     }
+    editProduct(id){
+        // axios.put(`/api/product/${id}`)
+        // this.componentDidMount()
+    }
 
     render(){
         let mappedInventory = this.state.inventory.map((el, i) => {
@@ -29,6 +34,9 @@ export default class Dashboard extends React.Component {
                     <h4>{el.name}</h4>
                     <h4>${el.price}</h4>
                     <button onClick={() => this.deleteProduct(el.id)}>Delete</button>
+                    <Link to={`/edit/${el.id}`}>
+                        <button>Edit Product</button>
+                    </Link>
                 </div>
             )
         })

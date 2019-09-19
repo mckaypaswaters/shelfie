@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import Dashboard from './Components/Dashboard/Dashboard'
-import Form from './Components/Form/Form'
 import Header from './Components/Header/Header'
-import axios from 'axios'
+import routes from './routes'
 
 class App extends React.Component {
   constructor(){
@@ -13,14 +11,19 @@ class App extends React.Component {
     }
   }
 
-
-  
-
   render() {
     return (
       <div className="App">
         <Header/>
-        <div className='flexin'>
+       {routes}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+ {/* <div className='flexin'>
           <Dashboard
           inventoryArr = {this.state.inventory}
           getInventory = {this.componentDidMount}
@@ -29,10 +32,4 @@ class App extends React.Component {
           inventoryArr = {this.state.inventory}
           getInventory = {this.componentDidMount}
           />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default App;
+        </div> */}
